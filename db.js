@@ -1,10 +1,16 @@
-var pgp = require('pg-promise')(/* options */)
-var db = pgp('postgres://macbookpro:admin@localhost:5235/learn_express')
-
-db.one('SELECT $1 AS value', 123)
-  .then(function (data) {
-    console.log('DATA:', data.value)
-  })
-  .catch(function (error) {
-    console.log('ERROR:', error)
-  })
+var sequelize = new Sequelize('database', 'username', 'password', {
+    host: 'localhost',
+    dialect: 'mysql'|'sqlite'|'postgres'|'mssql',
+  
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    },
+  
+    // SQLite only
+    storage: 'path/to/database.sqlite'
+  });
+  
+  // Or you can simply use a connection uri
+  var sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
